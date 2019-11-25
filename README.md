@@ -24,10 +24,10 @@ Here are Git commands you will need:
 1.	Update the location of the project – Navigate to src/main/java > com.auto.general > Constants.java > update “pathTestData”.
 2.  In "StepDefinitions.java" under com.auto.steps, you can choose your desired browser to test on by enabling one of the following lines. However, "loadFirefox" is the only driver that works properly. "loadIE" does not work and it's there for future development.
 
-//			Choose the driver below			
-		driver = Utility.loadChrome(excelPath, excelPage);
-//		driver = Utility.loadFirefox(excelPath, excelPage);
-//		driver = Utility.loadIE(excelPath, excelPage);
+	1)	//			Choose the driver below			
+	2)			driver = Utility.loadChrome(excelPath, excelPage);
+	3)	//		driver = Utility.loadFirefox(excelPath, excelPage);
+	4)	//		driver = Utility.loadIE(excelPath, excelPage);
 
 3.	Under src/main/java, there are two ways to execute tests:
 	1)	Open "Cucumber.feature" file under com.auto.features > right click on the file > find “Run as” > select “Cucumber feature”
