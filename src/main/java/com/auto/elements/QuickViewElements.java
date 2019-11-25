@@ -18,22 +18,6 @@ public class QuickViewElements {
 		return sizeTab;
 	}	
 	
-//	FIND OUTTTTTTTTTTTTTTTTT
-	@FindBy(xpath = "")
-	private WebElement medium;
-	
-	public WebElement getMedium() {
-		return medium;
-	}
-		
-//	FIND OUTTTTTTTTTTTTTTTTT
-	@FindBy(xpath = "")
-	private WebElement large;
-	
-	public WebElement getLarge() {
-		return large;
-	}
-	
 	@FindBy(xpath = "/html/body/div/div[2]/div/div[3]/div/div/div/div[4]/form/div/div[3]/div[1]/p/button/span")
 	private WebElement addCart;
 	
@@ -41,7 +25,7 @@ public class QuickViewElements {
 		return addCart;
 	}
 	
-	@FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/span/span")
+	@FindBy(xpath = "/html/body/div/div[1]/header/div[3]/div/div/div[4]/div[1]/div[2]/div[4]/span/span")
 	private WebElement continueShopping;
 	
 	public WebElement getContinue() {

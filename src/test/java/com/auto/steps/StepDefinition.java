@@ -48,8 +48,8 @@ public class StepDefinition {
 	public int excelPage = 0;
 //	public static Set<Cookie> allCookies;
 	public Select dropdown;
-	String parentWindow;
-	String childWindow;
+//	String parentWindow;
+//	String childWindow;
 	
 	@Before({"@cucumber"}) 
 	public void setup() {
@@ -64,8 +64,8 @@ public class StepDefinition {
 		ExcelUtils.setExcelFile(excelPath, excelPage);
 		
 //			Choose the driver below			
-		driver = Utility.loadChrome(excelPath, excelPage);
-//		driver = Utility.loadFirefox(excelPath, excelPage);
+//		driver = Utility.loadChrome(excelPath, excelPage);
+		driver = Utility.loadFirefox(excelPath, excelPage);
 //		driver = Utility.loadIE(excelPath, excelPage);
 		
 		driver.manage().window().maximize();
@@ -88,23 +88,14 @@ public class StepDefinition {
 	}
 
 	@When("^I Quick view the first item \"([^\"]*)\"$")
-	public void i_Quick_view_the_first_item(String arg1) throws InterruptedException {
+	public void i_Quick_view_the_first_item(String arg1) {
 		HomepageElements homePage = PageFactory.initElements(driver, HomepageElements.class);
 
-//		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"homefeatured\"]/li[1]/div/div[2]/div[2]/a[1]/span"))).click();
-		
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("document.getElementsByClassName(\"button ajax_add_to_cart_button btn btn-default\")[0].type = \"\";");
-		
-//		((JavascriptExecutor)driver).executeScript("arguments[0].checked = true;", homePage.getItem1());
+//				Enable below if elements in the popup cant be found - we may have to switch frames before trying to find elements within the popup 
 		
 //		String homeWindowId = driver.getWindowHandle();
-		
 		homePage.getItem1().click();
-		Thread.sleep(3000);
 		Utility.refreshDriver(driver);
-		
-//		
 //	    Set <String> windows = driver.getWindowHandles();
 //	    Iterator it = windows.iterator();
 //	    String currentWindowId;
@@ -123,25 +114,15 @@ public class StepDefinition {
 //	    	   }
 //	    }
 		
-		
-		
-		
-//		WebElement myDynamicElement = 
-//				(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/div[2]/div/div[2]/div/div[1]/ul[1]/li[1]/div/div[1]/div/a[1]/img")));
-
-//		WebDriverWait some_element = new WebDriverWait(driver,100); 
-//		some_element.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[2]/div/div[2]/div/div[1]/ul[1]/li[1]/div/div[1]/div/a[1]/img")));
-		
 		test.log(LogStatus.INFO, "Quick viewing the first item");
 	}
 
 	@When("^I change the size of the item \"([^\"]*)\"$")
 	public void i_change_the_size_of_the_item(String arg1) throws InterruptedException {
-		// add another cucumber command to check if cart displays the size!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		QuickViewElements quickView = PageFactory.initElements(driver, QuickViewElements.class);
 		dropdown = new Select(quickView.getSizeTab());
 		dropdown.selectByValue(arg1);
-		Thread.sleep(3000);
+		Thread.sleep(3000); // remove this after checking
 		Utility.refreshDriver(driver);
 		test.log(LogStatus.INFO, "'" + arg1 + "' size chosen");
 	}
@@ -157,9 +138,25 @@ public class StepDefinition {
 	@When("^I continue shopping$")
 	public void i_continue_shopping() {
 		QuickViewElements quickView = PageFactory.initElements(driver, QuickViewElements.class);
-		quickView.getContinue().submit();
+		quickView.getContinue().click();
 		Utility.refreshDriver(driver);
 		test.log(LogStatus.INFO, "Shopping continued");
+		
+//				if the code doesn't work, try this or the iFrame method
+//	    Set <String> windows = driver.getWindowHandles();
+//	    String homeWindowId = driver.getWindowHandle(); 	//this shouldn't be here - add this before quickView.getAddCart().click();
+//	    Iterator it = windows.iterator();
+//	    String currentWindowId; 
+//	    
+//	    while (it.hasNext()) {
+//	    	currentWindowId = it.next().toString();
+//	    	   if(!currentWindowId.equals(homeWindowId)) {
+//	    		   driver.switchTo().window(currentWindowId);
+//	    		    quickView.getContinue().click();
+//	    		   Thread.sleep(5000);
+//	    			Utility.refreshDriver(driver);
+//	    	   }
+//	    }
 	}
 
 	@When("^I Quick view the second item \"([^\"]*)\"$")
