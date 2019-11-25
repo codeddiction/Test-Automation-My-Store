@@ -124,15 +124,15 @@ public class StepDefinition {
 		dropdown.selectByValue(arg1);
 		Thread.sleep(3000); // remove this after checking
 		Utility.refreshDriver(driver);
-		test.log(LogStatus.INFO, "'" + arg1 + "' size chosen");
+		test.log(LogStatus.INFO, "Size chosen");
 	}
 
 	@When("^I add to cart$")
 	public void i_add_to_cart() {
 		QuickViewElements quickView = PageFactory.initElements(driver, QuickViewElements.class);
-		quickView.getAddCart().click();
+		quickView.getAddCart().submit();
 		Utility.refreshDriver(driver);
-		test.log(LogStatus.INFO, "The first item added to cart");
+		test.log(LogStatus.INFO, "Item added to cart");
 	}
 
 	@When("^I continue shopping$")
